@@ -7,7 +7,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Pokreće Login ekran
+
         new LoginScreen().show(stage);
     }
 

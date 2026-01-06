@@ -23,10 +23,10 @@ public class RegisterScreen {
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
 
-        // 🔑 TEMA (OVO JE FALILO)
+
         ComboBox<String> themeBox = new ComboBox<>();
         themeBox.getItems().addAll("Light", "Dark");
-        themeBox.setValue("Light"); // OBAVEZNO
+        themeBox.setValue("Light");
 
         Button registerButton = new Button("Register");
         Button backButton = new Button("Back");
@@ -42,7 +42,6 @@ public class RegisterScreen {
             UserDAO dao = new UserDAO();
             dao.insertUser(user);
 
-            // nakon registracije vrati na login
             new LoginScreen().show(stage);
         });
 
@@ -55,7 +54,7 @@ public class RegisterScreen {
                 title,
                 usernameField,
                 passwordField,
-                themeBox,        // 👈 DODANO U GUI
+                themeBox,
                 registerButton,
                 backButton
         );

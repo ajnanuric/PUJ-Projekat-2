@@ -1,13 +1,13 @@
 package lms;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
 import lms.database.UserDAO;
 import lms.models.User;
 
@@ -45,7 +45,6 @@ public class LoginScreen {
             }
         });
 
-        // 🔑 OVO JE FALILO
         registerButton.setOnAction(e -> {
             new RegisterScreen().show(stage);
         });
@@ -58,6 +57,12 @@ public class LoginScreen {
                 loginButton,
                 registerButton
         );
+
+
+        ThemeUtil.applyBackground(layout);
+        ThemeUtil.styleTitle(title);
+        ThemeUtil.styleButton(loginButton);
+        ThemeUtil.styleButton(registerButton);
 
         Scene scene = new Scene(layout, 300, 250);
         stage.setScene(scene);
