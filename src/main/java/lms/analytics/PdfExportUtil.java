@@ -23,7 +23,12 @@ public class PdfExportUtil {
             document.add(new Paragraph("Korisnik: " + user.getUsername()));
             document.add(new Paragraph("Tema: " + user.getTheme()));
             document.add(new Paragraph("Datum: " + LocalDate.now()));
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph("Statistika sna"));
+            document.add(new Paragraph("----------------------"));
 
+            double prosjekSna = 7.2;
+            document.add(new Paragraph("Prosječan broj sati sna: " + prosjekSna));
             document.close();
 
         } catch (Exception e) {

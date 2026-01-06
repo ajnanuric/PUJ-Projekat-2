@@ -1,0 +1,6 @@
+lms\ThemeUtil.class
+lms\LoginScreen.class
+lms\RegisterScreen.class
+lms\AnalyticsScreen.class
+lms\database\MongoDBConnection.class
+lms\MainMenu.class
