@@ -8,6 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lms.database.UserDAO;
+import lms.models.User;
 
 public class RegisterScreen {
 
@@ -21,20 +23,26 @@ public class RegisterScreen {
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
 
+        // 🔑 TEMA (OVO JE FALILO)
         ComboBox<String> themeBox = new ComboBox<>();
         themeBox.getItems().addAll("Light", "Dark");
-        themeBox.setValue("Light");
+        themeBox.setValue("Light"); // OBAVEZNO
 
         Button registerButton = new Button("Register");
         Button backButton = new Button("Back");
 
         registerButton.setOnAction(e -> {
-            // za sada samo ispis (kasnije ide MongoDB)
-            System.out.println("User registered:");
-            System.out.println("Username: " + usernameField.getText());
-            System.out.println("Theme: " + themeBox.getValue());
 
-            // nakon registracije vraćamo se na login
+            User user = new User(
+                    usernameField.getText(),
+                    passwordField.getText(),
+                    themeBox.getValue()
+            );
+
+            UserDAO dao = new UserDAO();
+            dao.insertUser(user);
+
+            // nakon registracije vrati na login
             new LoginScreen().show(stage);
         });
 
@@ -47,7 +55,7 @@ public class RegisterScreen {
                 title,
                 usernameField,
                 passwordField,
-                themeBox,
+                themeBox,        // 👈 DODANO U GUI
                 registerButton,
                 backButton
         );

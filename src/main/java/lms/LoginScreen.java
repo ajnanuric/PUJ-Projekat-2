@@ -7,6 +7,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import lms.database.UserDAO;
+import lms.models.User;
 
 public class LoginScreen {
 
@@ -24,10 +27,25 @@ public class LoginScreen {
         Button registerButton = new Button("Register");
 
         loginButton.setOnAction(e -> {
-            // za sada samo prelazimo dalje
-            new MainMenu().show(stage);
+
+            UserDAO dao = new UserDAO();
+            User user = dao.findUser(
+                    usernameField.getText(),
+                    passwordField.getText()
+            );
+
+            if (user != null) {
+                new MainMenu().show(stage);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška");
+                alert.setHeaderText(null);
+                alert.setContentText("Pogrešno korisničko ime ili lozinka");
+                alert.showAndWait();
+            }
         });
 
+        // 🔑 OVO JE FALILO
         registerButton.setOnAction(e -> {
             new RegisterScreen().show(stage);
         });

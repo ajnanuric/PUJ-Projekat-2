@@ -1,4 +1,7 @@
 lms\LoginScreen.class
 lms\RegisterScreen.class
-lms\MainMenu.class
+lms\database\MongoDBConnection.class
 lms\Main.class
+lms\models\User.class
+lms\database\UserDAO.class
+lms\MainMenu.class
