@@ -18,11 +18,12 @@
     </properties>
 
     <dependencies>
+
         <!-- JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
+            <version>11</version>
         </dependency>
 
         <!-- MongoDB -->
@@ -31,6 +32,14 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>4.11.1</version>
         </dependency>
+
+        <!-- PDF export -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
