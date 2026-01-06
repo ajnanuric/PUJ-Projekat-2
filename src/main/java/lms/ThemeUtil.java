@@ -6,29 +6,53 @@ import javafx.scene.layout.Pane;
 
 public class ThemeUtil {
 
+    public static void applyLight(Pane pane) {
+        pane.setStyle(
+                "-fx-background-color: #FFFFFF;"
+        );
+    }
 
-    public static void applyBackground(Pane pane) {
+    public static void applyDark(Pane pane) {
+        pane.setStyle(
+                "-fx-background-color: #2B2B2B;"
+        );
+    }
+
+    public static void styleButtonLight(Button button) {
+        button.setStyle(
+                "-fx-background-color: #E0E0E0;" +
+                        "-fx-text-fill: black;" +
+                        "-fx-background-radius: 10;"
+        );
+    }
+
+    public static void styleButtonDark(Button button) {
+        button.setStyle(
+                "-fx-background-color: #444444;" +
+                        "-fx-text-fill: white;" +
+                        "-fx-background-radius: 10;"
+        );
+    }
+
+    public static void styleTitleLight(Label label) {
+        label.setStyle(
+                "-fx-text-fill: black;" +
+                        "-fx-font-size: 16px;" +
+                        "-fx-font-weight: bold;"
+        );
+    }
+
+    public static void styleTitleDark(Label label) {
+        label.setStyle(
+                "-fx-text-fill: white;" +
+                        "-fx-font-size: 16px;" +
+                        "-fx-font-weight: bold;"
+        );
+    }
+    public static void applyPink(Pane pane) {
         pane.setStyle(
                 "-fx-background-color: #FADADD;"
         );
     }
 
-
-    public static void styleButton(Button button) {
-        button.setStyle(
-                "-fx-background-color: #F4A7B9;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-background-radius: 15;"
-        );
-    }
-
-
-    public static void styleTitle(Label label) {
-        label.setStyle(
-                "-fx-font-size: 16px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-text-fill: #8B3A62;"
-        );
-    }
 }

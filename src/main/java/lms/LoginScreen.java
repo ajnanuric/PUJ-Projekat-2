@@ -1,5 +1,7 @@
 package lms;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -19,12 +21,17 @@ public class LoginScreen {
 
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");
+        usernameField.setMaxWidth(250);
 
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
+        passwordField.setMaxWidth(250);
 
         Button loginButton = new Button("Login");
         Button registerButton = new Button("Register");
+
+        loginButton.setPrefWidth(200);
+        registerButton.setPrefWidth(200);
 
         loginButton.setOnAction(e -> {
 
@@ -35,7 +42,7 @@ public class LoginScreen {
             );
 
             if (user != null) {
-                new MainMenu().show(stage);
+                new MainMenu().show(stage, user);
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Greška");
@@ -45,11 +52,13 @@ public class LoginScreen {
             }
         });
 
-        registerButton.setOnAction(e -> {
-            new RegisterScreen().show(stage);
-        });
+        registerButton.setOnAction(e ->
+                new RegisterScreen().show(stage)
+        );
 
-        VBox layout = new VBox(10);
+        VBox layout = new VBox(15);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(40));
         layout.getChildren().addAll(
                 title,
                 usernameField,
@@ -58,14 +67,12 @@ public class LoginScreen {
                 registerButton
         );
 
+        ThemeUtil.applyPink(layout);
+        ThemeUtil.styleTitleLight(title);
+        ThemeUtil.styleButtonLight(loginButton);
+        ThemeUtil.styleButtonLight(registerButton);
 
-        ThemeUtil.applyBackground(layout);
-        ThemeUtil.styleTitle(title);
-        ThemeUtil.styleButton(loginButton);
-        ThemeUtil.styleButton(registerButton);
-
-        Scene scene = new Scene(layout, 300, 250);
-        stage.setScene(scene);
+        stage.setScene(new Scene(layout, 500, 400));
         stage.show();
     }
 }
