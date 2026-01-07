@@ -1,8 +1,12 @@
-lms\ThemeUtil.class
+lms\database\SleepDAO.class
 lms\LoginScreen.class
 lms\RegisterScreen.class
+lms\database\HabitDAO.class
+lms\achievement\AchievementUtil.class
+lms\database\MoodDAO.class
+lms\MainMenu.class
+lms\reminder\ReminderUtil.class
+lms\ThemeUtil.class
 lms\models\MoodEntry.class
 lms\AnalyticsScreen.class
 lms\database\MongoDBConnection.class
-lms\MainMenu.class
-lms\reminder\ReminderUtil.class
