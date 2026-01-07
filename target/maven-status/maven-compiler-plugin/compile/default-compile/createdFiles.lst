@@ -1,6 +1,8 @@
 lms\ThemeUtil.class
 lms\LoginScreen.class
 lms\RegisterScreen.class
+lms\models\MoodEntry.class
 lms\AnalyticsScreen.class
 lms\database\MongoDBConnection.class
 lms\MainMenu.class
+lms\reminder\ReminderUtil.class

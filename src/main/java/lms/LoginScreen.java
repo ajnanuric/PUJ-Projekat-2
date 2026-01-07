@@ -67,10 +67,10 @@ public class LoginScreen {
                 registerButton
         );
 
-        ThemeUtil.applyPink(layout);
-        ThemeUtil.styleTitleLight(title);
-        ThemeUtil.styleButtonLight(loginButton);
-        ThemeUtil.styleButtonLight(registerButton);
+        ThemeUtil.applyTheme(layout, "Pink");
+        ThemeUtil.styleTitle(title, "Pink");
+        ThemeUtil.styleButton(loginButton, "Pink");
+        ThemeUtil.styleButton(registerButton, "Pink");
 
         stage.setScene(new Scene(layout, 500, 400));
         stage.show();

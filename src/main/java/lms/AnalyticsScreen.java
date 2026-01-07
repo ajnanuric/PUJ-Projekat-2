@@ -1,5 +1,6 @@
 package lms;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,37 +15,24 @@ public class AnalyticsScreen {
 
         Label title = new Label("Analytics");
 
-        Button exportPdfButton = new Button("Export PDF");
+        Button exportButton = new Button("Export PDF");
         Button backButton = new Button("Nazad");
 
-        exportPdfButton.setOnAction(e -> {
-            PdfExportUtil.exportUserReport(user);
-        });
-
-        backButton.setOnAction(e -> {
-            new MainMenu().show(stage, user);
-        });
-
-        VBox layout = new VBox(15);
-        layout.getChildren().addAll(
-                title,
-                exportPdfButton,
-                backButton
+        exportButton.setOnAction(e ->
+                PdfExportUtil.export(user)
         );
 
-        if ("Dark".equals(user.getTheme())) {
-            ThemeUtil.applyDark(layout);
-            ThemeUtil.styleTitleDark(title);
-            ThemeUtil.styleButtonDark(exportPdfButton);
-            ThemeUtil.styleButtonDark(backButton);
-        } else {
-            ThemeUtil.applyLight(layout);
-            ThemeUtil.styleTitleLight(title);
-            ThemeUtil.styleButtonLight(exportPdfButton);
-            ThemeUtil.styleButtonLight(backButton);
-        }
+        backButton.setOnAction(e -> new MainMenu().show(stage, user));
 
-        stage.setScene(new Scene(layout, 300, 200));
+        VBox layout = new VBox(20, title, exportButton, backButton);
+        layout.setAlignment(Pos.CENTER);
+
+        ThemeUtil.applyTheme(layout, user.getTheme());
+        ThemeUtil.styleTitle(title, user.getTheme());
+        ThemeUtil.styleButton(exportButton, user.getTheme());
+        ThemeUtil.styleButton(backButton, user.getTheme());
+
+        stage.setScene(new Scene(layout, 300, 220));
         stage.show();
     }
 }

@@ -3,34 +3,37 @@ package lms.analytics;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import lms.HabitTrackerScreen;
+import lms.MoodTrackerScreen;
+import lms.SleepTrackerScreen;
 import lms.models.User;
 
 import java.io.FileOutputStream;
-import java.time.LocalDate;
 
 public class PdfExportUtil {
 
-    public static void exportUserReport(User user) {
-
+    public static void export(User user) {
         try {
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("lms_report.pdf"));
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, new FileOutputStream("report.pdf"));
+            doc.open();
 
-            document.open();
+            doc.add(new Paragraph("Korisnik: " + user.getUsername()));
+            doc.add(new Paragraph("Tema: " + user.getTheme()));
+            doc.add(new Paragraph(" "));
 
-            document.add(new Paragraph("Life Management System - Izvještaj"));
-            document.add(new Paragraph(" "));
-            document.add(new Paragraph("Korisnik: " + user.getUsername()));
-            document.add(new Paragraph("Tema: " + user.getTheme()));
-            document.add(new Paragraph("Datum: " + LocalDate.now()));
-            document.add(new Paragraph(" "));
-            document.add(new Paragraph("Statistika sna"));
-            document.add(new Paragraph("----------------------"));
+            doc.add(new Paragraph("Sleep:"));
+            for (String s : SleepTrackerScreen.getData()) doc.add(new Paragraph(s));
 
-            double prosjekSna = 7.2;
-            document.add(new Paragraph("Prosječan broj sati sna: " + prosjekSna));
-            document.close();
+            doc.add(new Paragraph(" "));
+            doc.add(new Paragraph("Habits:"));
+            for (String h : HabitTrackerScreen.getHabits()) doc.add(new Paragraph(h));
 
+            doc.add(new Paragraph(" "));
+            doc.add(new Paragraph("Mood:"));
+            for (String m : MoodTrackerScreen.getMoods()) doc.add(new Paragraph(m));
+
+            doc.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

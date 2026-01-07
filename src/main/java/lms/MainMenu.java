@@ -3,12 +3,12 @@ package lms;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lms.models.User;
+import lms.reminder.ReminderUtil;
 
 public class MainMenu {
 
@@ -16,19 +16,19 @@ public class MainMenu {
 
         Label title = new Label("Life Management System");
 
+        Label reminderTitle = new Label("Današnji podsjetnik:");
+        Label reminderLabel = new Label(ReminderUtil.getRandomReminder());
+
+        ComboBox<String> themeBox = new ComboBox<>();
+        themeBox.getItems().addAll("Pink", "Dark", "Blue", "Green");
+        themeBox.setValue(user.getTheme());
+
         Button sleepButton = new Button("Sleep Tracker");
         Button habitButton = new Button("Habit Tracker");
         Button moodButton = new Button("Mood Tracker");
         Button financeButton = new Button("Finance Tracker");
         Button analyticsButton = new Button("Analytics");
         Button logoutButton = new Button("Logout");
-
-        sleepButton.setPrefSize(160, 60);
-        habitButton.setPrefSize(160, 60);
-        moodButton.setPrefSize(160, 60);
-        financeButton.setPrefSize(160, 60);
-        analyticsButton.setPrefSize(160, 60);
-        logoutButton.setPrefSize(160, 60);
 
         sleepButton.setOnAction(e -> new SleepTrackerScreen().show(stage, user));
         habitButton.setOnAction(e -> new HabitTrackerScreen().show(stage, user));
@@ -45,37 +45,30 @@ public class MainMenu {
         grid.add(sleepButton, 0, 0);
         grid.add(habitButton, 1, 0);
         grid.add(moodButton, 2, 0);
-
         grid.add(financeButton, 0, 1);
         grid.add(analyticsButton, 1, 1);
         grid.add(logoutButton, 2, 1);
 
-        VBox root = new VBox(25);
+        VBox root = new VBox(15, title, reminderTitle, reminderLabel, new Label("Tema:"), themeBox, grid);
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(title, grid);
 
-        if ("Dark".equals(user.getTheme())) {
-            ThemeUtil.applyDark(root);
-            ThemeUtil.styleTitleDark(title);
-            ThemeUtil.styleButtonDark(sleepButton);
-            ThemeUtil.styleButtonDark(habitButton);
-            ThemeUtil.styleButtonDark(moodButton);
-            ThemeUtil.styleButtonDark(financeButton);
-            ThemeUtil.styleButtonDark(analyticsButton);
-            ThemeUtil.styleButtonDark(logoutButton);
-        } else {
-            ThemeUtil.applyLight(root);
-            ThemeUtil.styleTitleLight(title);
-            ThemeUtil.styleButtonLight(sleepButton);
-            ThemeUtil.styleButtonLight(habitButton);
-            ThemeUtil.styleButtonLight(moodButton);
-            ThemeUtil.styleButtonLight(financeButton);
-            ThemeUtil.styleButtonLight(analyticsButton);
-            ThemeUtil.styleButtonLight(logoutButton);
-        }
+        applyTheme(root, title, user, sleepButton, habitButton, moodButton, financeButton, analyticsButton, logoutButton);
 
-        stage.setScene(new Scene(root, 600, 400));
+        themeBox.setOnAction(e -> {
+            user.setTheme(themeBox.getValue());
+            applyTheme(root, title, user, sleepButton, habitButton, moodButton, financeButton, analyticsButton, logoutButton);
+        });
+
+        stage.setScene(new Scene(root, 700, 500));
         stage.show();
+    }
+
+    private void applyTheme(VBox root, Label title, User user, Button... buttons) {
+        ThemeUtil.applyTheme(root, user.getTheme());
+        ThemeUtil.styleTitle(title, user.getTheme());
+        for (Button b : buttons) {
+            ThemeUtil.styleButton(b, user.getTheme());
+        }
     }
 }

@@ -27,21 +27,15 @@ public class FinanceScreen {
                 new MainMenu().show(stage, user)
         );
 
-        VBox layout = new VBox(15, title, openButton, backButton);
+        VBox layout = new VBox(20, title, openButton, backButton);
+        layout.setAlignment(javafx.geometry.Pos.CENTER);
 
-        if ("Dark".equals(user.getTheme())) {
-            ThemeUtil.applyDark(layout);
-            ThemeUtil.styleTitleDark(title);
-            ThemeUtil.styleButtonDark(openButton);
-            ThemeUtil.styleButtonDark(backButton);
-        } else {
-            ThemeUtil.applyLight(layout);
-            ThemeUtil.styleTitleLight(title);
-            ThemeUtil.styleButtonLight(openButton);
-            ThemeUtil.styleButtonLight(backButton);
-        }
+        ThemeUtil.applyTheme(layout, user.getTheme());
+        ThemeUtil.styleTitle(title, user.getTheme());
+        ThemeUtil.styleButton(openButton, user.getTheme());
+        ThemeUtil.styleButton(backButton, user.getTheme());
 
-        stage.setScene(new Scene(layout, 300, 200));
+        stage.setScene(new Scene(layout, 300, 220));
         stage.show();
     }
 }

@@ -6,53 +6,31 @@ import javafx.scene.layout.Pane;
 
 public class ThemeUtil {
 
-    public static void applyLight(Pane pane) {
-        pane.setStyle(
-                "-fx-background-color: #FFFFFF;"
-        );
+    public static void applyTheme(Pane pane, String theme) {
+        if ("Dark".equals(theme)) {
+            pane.setStyle("-fx-background-color: #1e1e1e;");
+        } else if ("Blue".equals(theme)) {
+            pane.setStyle("-fx-background-color: #dbeafe;");
+        } else if ("Green".equals(theme)) {
+            pane.setStyle("-fx-background-color: #dcfce7;");
+        } else {
+            pane.setStyle("-fx-background-color: #fce7f3;");
+        }
     }
 
-    public static void applyDark(Pane pane) {
-        pane.setStyle(
-                "-fx-background-color: #2B2B2B;"
-        );
+    public static void styleTitle(Label label, String theme) {
+        if ("Dark".equals(theme)) {
+            label.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;");
+        } else {
+            label.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #111;");
+        }
     }
 
-    public static void styleButtonLight(Button button) {
-        button.setStyle(
-                "-fx-background-color: #E0E0E0;" +
-                        "-fx-text-fill: black;" +
-                        "-fx-background-radius: 10;"
-        );
+    public static void styleButton(Button button, String theme) {
+        if ("Dark".equals(theme)) {
+            button.setStyle("-fx-background-color: #3f3f46; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;");
+        } else {
+            button.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #ccc;");
+        }
     }
-
-    public static void styleButtonDark(Button button) {
-        button.setStyle(
-                "-fx-background-color: #444444;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-background-radius: 10;"
-        );
-    }
-
-    public static void styleTitleLight(Label label) {
-        label.setStyle(
-                "-fx-text-fill: black;" +
-                        "-fx-font-size: 16px;" +
-                        "-fx-font-weight: bold;"
-        );
-    }
-
-    public static void styleTitleDark(Label label) {
-        label.setStyle(
-                "-fx-text-fill: white;" +
-                        "-fx-font-size: 16px;" +
-                        "-fx-font-weight: bold;"
-        );
-    }
-    public static void applyPink(Pane pane) {
-        pane.setStyle(
-                "-fx-background-color: #FADADD;"
-        );
-    }
-
 }

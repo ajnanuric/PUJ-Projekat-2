@@ -1,45 +1,53 @@
 package lms;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lms.models.User;
 
+import java.time.LocalDate;
+
 public class SleepTrackerScreen {
+
+    private static final ObservableList<String> data = FXCollections.observableArrayList();
 
     public void show(Stage stage, User user) {
 
         Label title = new Label("Sleep Tracker");
 
-        TextField dayField = new TextField();
-        dayField.setPromptText("Day");
+        Spinner<Integer> hours = new Spinner<>(0, 24, 8);
 
-        TextField hoursField = new TextField();
-        hoursField.setPromptText("Hours slept");
+        Button saveButton = new Button("Spremi");
+        Button backButton = new Button("Nazad");
 
-        TextArea noteArea = new TextArea();
-        noteArea.setPromptText("Note");
+        ListView<String> list = new ListView<>(data);
 
-        Button backButton = new Button("Back");
+        saveButton.setOnAction(e ->
+                data.add(LocalDate.now() + " - " + hours.getValue() + " sati")
+        );
+
         backButton.setOnAction(e -> new MainMenu().show(stage, user));
 
-        VBox layout = new VBox(10, title, dayField, hoursField, noteArea, backButton);
+        VBox layout = new VBox(15, title, hours, saveButton, list, backButton);
+        layout.setAlignment(Pos.CENTER);
 
-        if ("Dark".equals(user.getTheme())) {
-            ThemeUtil.applyDark(layout);
-            ThemeUtil.styleTitleDark(title);
-            ThemeUtil.styleButtonDark(backButton);
-        } else {
-            ThemeUtil.applyLight(layout);
-            ThemeUtil.styleTitleLight(title);
-            ThemeUtil.styleButtonLight(backButton);
-        }
+        ThemeUtil.applyTheme(layout, user.getTheme());
+        ThemeUtil.styleTitle(title, user.getTheme());
+        ThemeUtil.styleButton(saveButton, user.getTheme());
+        ThemeUtil.styleButton(backButton, user.getTheme());
 
-        stage.setScene(new Scene(layout, 350, 350));
+        stage.setScene(new Scene(layout, 400, 500));
         stage.show();
+    }
+
+    public static ObservableList<String> getData() {
+        return data;
     }
 }
